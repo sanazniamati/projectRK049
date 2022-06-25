@@ -1,24 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Stage, Layer, Text, Circle } from "react-konva";
 
 const App = () => {
   const [text, setText] = useState("");
-  const ref = useRef();
-  const handelListen = () => {
-    ref.listening(true);
-    ref.listening(false);
+
+  const handelListen = (e) => {
+    e.listening = true;
   };
-  const handelDontListen = () => {};
+  const handelDontListen = (e) => {
+    e.listening = false;
+  };
   return (
     <>
-      <div id="buttons">
-        <button onClick={handelListen} id="listen">
-          Listen
-        </button>
-        <button onClick={handelDontListen} id="dontdontListen">
-          Dont' Listen
-        </button>
+      <div>
+        <button onClick={handelListen}>Listen</button>
+        <button onClick={handelDontListen}>Dont' Listen</button>
       </div>
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
@@ -42,7 +39,6 @@ const App = () => {
             onMouseOver={() => setText("Mouse Over")}
             onMouseOut={() => setText("Mouse Out")}
             listening={false}
-            ref={ref}
           />
         </Layer>
       </Stage>
